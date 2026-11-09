@@ -1,6 +1,6 @@
 #pragma once
-#include	"Vector.h"
-#include	"Input.h"
+#include	"../Matsunaga/Vector/Vector.h"
+#include	"../Matsunaga/Input/Input.h"
 
 class Player {
 public:

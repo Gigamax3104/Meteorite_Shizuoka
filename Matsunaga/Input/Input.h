@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector.h"
+#include "../Vector/Vector.h"
 #include "Dxlib.h"
 
 class Input

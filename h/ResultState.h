@@ -11,7 +11,6 @@ public:
 	StateBase* Loop() override;
 	void Exit() override;
 
-	void Draw(int index, Vector2 pos, Vector2 scale);
 private:
 	bool m_resultFlag = true;
 

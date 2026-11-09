@@ -1,5 +1,4 @@
 #pragma once
-#include	"Vector.h"
 #include	"Color.h"
 #include	"File.h"
 
@@ -69,7 +68,8 @@ public:
 
 	void Draw(const Vector2& pos);
 
-	void ExDraw(const Vector2& pos, const Vector2 scale);
+	void ExDraw_Limit(const Vector2& pos, const Vector2 limit);
+	void ExDraw_Scale(const Vector2& pos, const Vector2 scale);
 
 	void SetImage(const std::string& file_name);
 

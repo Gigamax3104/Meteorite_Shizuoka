@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 class Vector2
 {
 public:
 	double x;
 	double y;
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Vector2(double x, double y);
 	Vector2();
 
-	// ‰‰ZqƒI[ƒo[ƒ[ƒh
+	// æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 	Vector2 operator+(const Vector2& other)const;
 	Vector2& operator+=(const Vector2& other);
 
@@ -28,9 +28,9 @@ public:
 
 	bool operator==(const Vector2& other)const;
 	bool operator!=(const Vector2& other)const;
-	double Magnitude() const; // ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ğ•Ô‚·ŠÖ”isqrt‚ğg‚Á‚Ä‚¢‚é‚½‚ß–ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·‚Ì‚ÍNGj
-	Vector2 Normalized() const; // ³‹K‰»
-	double SqMagnitude() const; // ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚Ì“ñæ‚ğ•Ô‚·ŠÖ”
+	double Magnitude() const; // ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’è¿”ã™é–¢æ•°ï¼ˆsqrtã‚’ä½¿ã£ã¦ã„ã‚‹ãŸã‚æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™ã®ã¯NGï¼‰
+	Vector2 Normalized() const; // æ­£è¦åŒ–
+	double SqMagnitude() const; // ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã®äºŒä¹—ã‚’è¿”ã™é–¢æ•°
 
 	static const Vector2 zero; // x:0 y:0
 	static const Vector2 one; // x:1 y:1
@@ -41,11 +41,11 @@ public:
 	
 
 };
-double Vector2Distance(const Vector2& a, const Vector2& b); // “ñ“_ŠÔ‚Ì‹——£‚ğ•Ô‚·ŠÖ”isqrt‚ğg‚Á‚Ä‚¢‚é‚½‚ß–ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·‚Ì‚ÍNGj
-double Vector2DistanceSq(const Vector2& a, const Vector2& b); // “ñ“_ŠÔ‚Ì‹——£‚Ì“ñæ‚ğ•Ô‚·ŠÖ”
+double Vector2Distance(const Vector2& a, const Vector2& b); // äºŒç‚¹é–“ã®è·é›¢ã‚’è¿”ã™é–¢æ•°ï¼ˆsqrtã‚’ä½¿ã£ã¦ã„ã‚‹ãŸã‚æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™ã®ã¯NGï¼‰
+double Vector2DistanceSq(const Vector2& a, const Vector2& b); // äºŒç‚¹é–“ã®è·é›¢ã®äºŒä¹—ã‚’è¿”ã™é–¢æ•°
 
-double Dot(const Vector2& a, const Vector2& b); // “àÏ‚ÌŒvZ
-double Cross(const Vector2& a, const Vector2& b); // ŠOÏ‚ÌŒvZ
+double Dot(const Vector2& a, const Vector2& b); // å†…ç©ã®è¨ˆç®—
+double Cross(const Vector2& a, const Vector2& b); // å¤–ç©ã®è¨ˆç®—
 
 
 class Vector3
@@ -55,11 +55,11 @@ public:
 	double y;
 	double z;
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Vector3(double x, double y, double z);
 	Vector3();
 
-	// ‰‰ZqƒI[ƒo[ƒ[ƒh
+	// æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
 	Vector3 operator+(const Vector3& other)const;
 	Vector3& operator+=(const Vector3& other);
 
@@ -78,9 +78,9 @@ public:
 
 	bool operator==(const Vector3& other)const;
 	bool operator!=(const Vector3& other)const;
-	double Magnitude() const;  // ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ğ•Ô‚·ŠÖ”isqrt‚ğg‚Á‚Ä‚¢‚é‚½‚ß–ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·‚Ì‚ÍNGj
-	Vector3 Normalized() const; // ³‹K‰»
-	double SqMagnitude() const; //ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚Ì“ñæ‚ğ•Ô‚·ŠÖ” 
+	double Magnitude() const;  // ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’è¿”ã™é–¢æ•°ï¼ˆsqrtã‚’ä½¿ã£ã¦ã„ã‚‹ãŸã‚æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™ã®ã¯NGï¼‰
+	Vector3 Normalized() const; // æ­£è¦åŒ–
+	double SqMagnitude() const; //ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã®äºŒä¹—ã‚’è¿”ã™é–¢æ•° 
 
 	static const Vector3 zero; // x:0 y:0 z:0
 	static const Vector3 one; // x:1 y:1 z:1
@@ -93,10 +93,10 @@ public:
 
 };
 
-double Vector3Distance(const Vector3& a, const Vector3& b); // “ñ“_ŠÔ‚Ì‹——£‚ğ•Ô‚·ŠÖ”isqrt‚ğg‚Á‚Ä‚¢‚é‚½‚ß–ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·‚Ì‚ÍNGj
-double Vector3DistanceSq(const Vector3& a, const Vector3& b); // “ñ“_ŠÔ‚Ì‹——£‚Ì“ñæ‚ğ•Ô‚·ŠÖ”
+double Vector3Distance(const Vector3& a, const Vector3& b); // äºŒç‚¹é–“ã®è·é›¢ã‚’è¿”ã™é–¢æ•°ï¼ˆsqrtã‚’ä½¿ã£ã¦ã„ã‚‹ãŸã‚æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™ã®ã¯NGï¼‰
+double Vector3DistanceSq(const Vector3& a, const Vector3& b); // äºŒç‚¹é–“ã®è·é›¢ã®äºŒä¹—ã‚’è¿”ã™é–¢æ•°
 
-double Dot(const Vector3& a, const Vector3& b); // “àÏ‚ÌŒvZ
-Vector3 Cross(const Vector3& a, const Vector3& b); // ŠOÏ‚ÌŒvZ
+double Dot(const Vector3& a, const Vector3& b); // å†…ç©ã®è¨ˆç®—
+Vector3 Cross(const Vector3& a, const Vector3& b); // å¤–ç©ã®è¨ˆç®—
 
 

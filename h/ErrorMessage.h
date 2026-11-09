@@ -2,7 +2,7 @@
 #include	<string>
 
 #include	"DxLib.h"
-#include	"Vector.h"
+#include	"../Matsunaga/Vector/Vector.h"
 
 class ErrorMassage {
 public:

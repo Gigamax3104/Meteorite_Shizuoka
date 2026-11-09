@@ -3,7 +3,7 @@
 #include	"../h/ErrorMessage.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	SetGraphMode(1080, 720, 32);
+	SetGraphMode(720, 720, 32);
 	ChangeWindowMode(TRUE);
 
 	if (DxLib_Init() == -1) return -1;
@@ -26,21 +26,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 
 			ScreenFlip();
+			WaitTimer(16);
 			if (CheckHitKey(KEY_INPUT_0) == 1) break;
 			if (ProcessMessage() == -1) break;
 		}
 	}
 	catch (ErrorMassage massage) {
-		while (1) {
-			ClearDrawScreen();
+		ClearDrawScreen();
 
-			massage.Show();
+		massage.Show();
 
-			ScreenFlip();
+		ScreenFlip();
 
-			if (CheckHitKey(KEY_INPUT_0) == 1) break;
-			if (ProcessMessage() == -1) break;
-		}
+		WaitKey();
 	}
 
 	DxLib_End();

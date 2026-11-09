@@ -10,7 +10,7 @@
 #include	<utility>
 
 #include	"DxLib.h"
-#include	"Vector.h"
+#include	"../Matsunaga/Vector/Vector.h"
 
 #define BINARY std::ios::binary
 #define IN std::ios::in
