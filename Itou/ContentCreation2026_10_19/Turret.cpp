@@ -1,7 +1,7 @@
 ﻿#include "Turret.h"
 #include "Ammo.h"
 #include "Dxlib.h"
-#include "../../Iwasaki/meteorite-master/Time.h"
+#include "../../Iwasaki/Time/Time.h"
 
 #include <cmath>
 

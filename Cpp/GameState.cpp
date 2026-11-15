@@ -1,9 +1,9 @@
 #include	"../h/ResultState.h"
 #include	"../h/GameState.h"
 
-#include	"../Iwasaki/meteorite-master/Time.h"
+#include	"../Iwasaki/Time/Time.h"
 
-#include	"../Matsunaga/Collision/Collision.h"
+#include	"../Iwasaki/Collision/Collision.h"
 
 using namespace std;
 

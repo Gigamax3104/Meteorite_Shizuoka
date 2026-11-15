@@ -1,6 +1,6 @@
 ﻿#include "Ammo.h"
 #include "Turret.h"
-#include	"../../Iwasaki/meteorite-master/Time.h"
+#include	"../../Iwasaki/Time/Time.h"
 #include <cmath>
 #include "Dxlib.h"
 //クラス名、関数名はアッパーキャメルケース、変数名はローワースネークケース、ただし、グローバル変数はアッパースネークケース

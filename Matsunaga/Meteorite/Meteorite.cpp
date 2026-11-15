@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "Meteorite.h"
-#include "../../Iwasaki/meteorite-master/Time.h"
+#include "../../Iwasaki/Time/Time.h"
 
 #include <vector>
 

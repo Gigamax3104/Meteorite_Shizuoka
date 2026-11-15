@@ -1,5 +1,6 @@
 #pragma once
-#include "../Vector/Vector.h"
+#include "../../Matsunaga/Vector/Vector.h"
+
 namespace Collision
 {
 	bool PointAndCircle(Vector2 pointPos, Vector2 circlePos, double circleRadius); // “_‚Ì‰~‚Ì“–‚½‚è”»’è

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-class Bullet;
+//class Bullet;
 
 class System {
 private:
