@@ -1,20 +1,27 @@
-#include	"../h/ResultState.h"
+﻿#include	"../h/ResultState.h"
 #include	"../h/GameState.h"
 
 #include	"../Iwasaki/Time/Time.h"
 
 #include	"../Iwasaki/Collision/Collision.h"
 
+#include	"../Matsunaga/Debug/Debug.h"
+
 using namespace std;
 
 void GameState::Enter() {
 	m_turret.InitTurretPosition(); //砲台の位置の初期化
+
+	Debug::Add("Turret_Pos", [this]() { return m_turret.GiveTurretPosition(); }, 0, "Turret");
+	Debug::Add("Earth_HP", [this]() { return m_earth.GetHp();}, 1, "Earth");
 }
 
 StateBase* GameState::Loop() {
+	Debug::Draw();
+
 	Time::Update();
 
-	DrawString(0, 0, "Game", 0xffffff);
+	DrawString(0, 40, "Game", 0xffffff);
 
 	m_turret.InputTurretPosition(); //プレイヤーの入力処理による移動
 	m_turret.InputTurretShoot(); //プレイヤーの入力処理による弾発射
@@ -37,12 +44,12 @@ StateBase* GameState::Loop() {
 		{
 			bool isCollision = false;
 
-			for (auto meteorite = meteorites.begin(); meteorite != meteorites.end(); )
+			for (auto meteoriteIt = meteorites.begin(); meteoriteIt != meteorites.end(); )
 			{
 				//弾と隕石の当たり判定
-				if (Collision::CircleAndCircle((ammo)->Position(), (ammo)->Radius(), (meteorite)->Position(), (meteorite)->Radius()))
+				if (Collision::CircleAndCircle((ammo)->Position(), (ammo)->Radius(), (meteoriteIt)->Position(), (meteoriteIt)->Radius()))
 				{
-					meteorite = meteorites.erase(meteorite);
+					meteoriteIt = meteorites.erase(meteoriteIt);
 					int size = meteorites.size();
 
 					ammo->DestroyAmmo();
@@ -55,7 +62,7 @@ StateBase* GameState::Loop() {
 				}
 				else
 				{
-					meteorite++;
+					meteoriteIt++;
 				}
 			}
 			if (!isCollision)

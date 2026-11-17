@@ -1,9 +1,12 @@
 #include	"DxLib.h"
 #include	"../h/TitleState.h"
 #include	"../h/ErrorMessage.h"
+#include	"../Iwasaki/Window.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	SetGraphMode(720, 720, 32);
+	Window::Init(Vector2(1080, 720), 32);
+
+	SetGraphMode(Window::GetPos().x, Window::GetPos().y, Window::GetBit());
 	ChangeWindowMode(TRUE);
 
 	if (DxLib_Init() == -1) return -1;

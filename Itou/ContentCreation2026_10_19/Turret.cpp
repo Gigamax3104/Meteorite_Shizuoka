@@ -1,5 +1,6 @@
 ﻿#include "Turret.h"
 #include "Ammo.h"
+#include "../../Iwasaki/Window.h"
 #include "Dxlib.h"
 #include "../../Iwasaki/Time/Time.h"
 
@@ -17,7 +18,7 @@ move_counter_clockwise_(false), degree_(0), speed_(1.0), input_shoot_(false){}
 
 ////////////////////////////////////////////////////////////////////
 void Turret::InitTurretPosition() {
-	center_position_ = Vector2(720 / 2, 720 / 2);
+	center_position_ = Vector2(Window::GetPos().x / 2, Window::GetPos().y / 2);
 	position_ = Vector2(center_position_.x, center_position_.y - move_radius_); //タレットの初期座標設定
 
 	degree_ = 90;

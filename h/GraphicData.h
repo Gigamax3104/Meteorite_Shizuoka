@@ -4,31 +4,52 @@
 
 #include	<fstream>
 
-template<typename T> class Font {
+class Font {
 public:
-	Font() : m_font(CreateFontToHandle(NULL, 10, 3)){}
-	Font(int size, int thick) : m_font(CreateFontToHandle(NULL, size, thick)){}
-	Font(int size, int thick, char* font_name = NULL, int type = -1) : m_font(CreateFontToHandle(font_name, size, thick, type)){}
-	Font(int size, int thick, const TCHAR* font_name = NULL, int type = -1) : m_font(CreateFontToHandle(font_name, size, thick, type)){}
+	Font() : m_text(""), m_pos(0, 0), m_color(COLOR_BLACK) {}
+	Font(std::string text, Vector2 pos, int color);
 
-	virtual ~Font() { DeleteFontToHandle(m_font); }
+	virtual ~Font() { if (m_font != -1 && m_font != NULL) DeleteFontToHandle(m_font); }
 
-	void Draw(Vector2 pos, const char* font, Color c);
-	void Draw(Vector2 pos, std::string font, Color c);
+	static void Draw(Vector2 pos, const char* font, Color c);
+	static void Draw(Vector2 pos, std::string font, Color c);
 
-	void FDraw(Vector2 pos, const char* font, Color c, const T data/* = nullptr*/);
-	void FDraw(Vector2 pos, std::string font, Color c, const T data/* = nullptr*/);
+	template<typename T> static void FDraw(Vector2 pos, int color, const char* type, const T& data);
+	template<typename T> static void FDraw(Vector2 pos, int color, std::string type, const T& data);
+	template<typename T> static void FDraw(Vector2 pos, Color c, const char* type, const T& data);
+	template<typename T> static void FDraw(Vector2 pos, Color c, std::string type, const T& data);
 
-	void ExDraw(Vector2 pos, Vector2 size, const char* font, Color c, const T data/* = nullptr*/);
-	void ExDraw(Vector2 pos, Vector2 size, std::string font, Color c, const T data/* = nullptr*/);
+	template<typename T> static void ExDraw(Vector2 pos, Vector2 size, int color, const char* type, const T& data);
+	template<typename T> static void ExDraw(Vector2 pos, Vector2 size, int color, std::string type, const T& data);
+	template<typename T> static void ExDraw(Vector2 pos, Vector2 size, Color c, const char* type, const T& data);
+	template<typename T> static void ExDraw(Vector2 pos, Vector2 size, Color c, std::string type, const T& data);
 
 	void MFDraw(Vector2 pos, const char* font, Color c) { DrawStringToHandle(pos.x, pos.y, font, c.color, m_font); }
-	void MFDraw(Vector2 pos, std::string font, Color c) { DrawStringToHandle(pos.x, pos.y, (const TCHAR*)&font, c.color, m_font); }
+	void MFDraw(Vector2 pos, std::string font, Color c) { DrawStringToHandle(pos.x, pos.y, font.c_str(), c.color, m_font); }
 
+	void SetFont(const char* font_name, int size, int thick);
+	void SetFont(const char* font_name, int size, int thick, int type);
+
+	void SetText_All(const char* text, Vector2 pos, int color) { SetPos(pos); SetColor(color); SetText(text); }
+	void SetText_All(std::string text, Vector2 pos, int color) { SetPos(pos); SetColor(color); SetText(text); }
+	void SetPos(Vector2 pos) { m_pos = pos; }
+	void SetColor(int color) { m_color.color = color; }
+	void SetText(const char* text);
+	void SetText(std::string text);
+
+	void NormalDrawText() { DrawFormatString(m_pos.x, m_pos.y, m_color.color, "%s", m_text.c_str()); }
+	void OrderDrawText();
+
+	void ResetShow() { if (m_show != "\0") m_show.clear(); if (!m_byte_flag.empty()) m_byte_flag.clear(); m_show_index = 0; }
 private:
-	int m_font;
+	int m_font = NULL;
 
-	
+	Vector2 m_pos;
+	Color m_color;
+	std::string m_text;
+	int m_show_index = 0;
+	std::string m_show;
+	std::vector<bool> m_byte_flag;
 };
 
 class Sound {
