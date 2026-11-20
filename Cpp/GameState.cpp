@@ -12,16 +12,17 @@ using namespace std;
 void GameState::Enter() {
 	m_turret.InitTurretPosition(); //砲台の位置の初期化
 
-	Debug::Add("Turret_Pos", [this]() { return m_turret.GiveTurretPosition(); }, 0, "Turret");
-	Debug::Add("Earth_HP", [this]() { return m_earth.GetHp();}, 1, "Earth");
+	Debug::AddString("Turret_Pos_X", [this]() { return std::to_string(m_turret.GiveTurretPosition().x); }, 0xffffff, 0, "Turret", 0, true, true);
+	Debug::AddString("Turret_Pos_Y", [this]() { return std::to_string(m_turret.GiveTurretPosition().y); }, 0xffffff, 0, "Turret", 1, true, true);
+	Debug::AddString("Earth_HP", [this]() { return std::to_string(m_earth.GetHp());}, 0xffffff, 0, "Earth", 2, true, true);
 }
 
 StateBase* GameState::Loop() {
-	Debug::Draw();
+	Debug::Draw(Input::GetDebugValue());
 
 	Time::Update();
 
-	DrawString(0, 40, "Game", 0xffffff);
+	DrawString(0, 20, "Game", 0xffffff);
 
 	m_turret.InputTurretPosition(); //プレイヤーの入力処理による移動
 	m_turret.InputTurretShoot(); //プレイヤーの入力処理による弾発射
