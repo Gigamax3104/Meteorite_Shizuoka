@@ -12,8 +12,7 @@ using namespace std;
 void GameState::Enter() {
 	m_turret.InitTurretPosition(); //砲台の位置の初期化
 
-	Debug::AddString("Turret_Pos_X", [this]() { return std::to_string(m_turret.GiveTurretPosition().x); }, 0xffffff, 0, "Turret", 0, true, true);
-	Debug::AddString("Turret_Pos_Y", [this]() { return std::to_string(m_turret.GiveTurretPosition().y); }, 0xffffff, 0, "Turret", 1, true, true);
+	Debug::AddString("Turret_Pos", [this]() { return m_turret.GiveTurretPosition(); }, 0xffffff, 0, "Turret", 0, true, true);
 	Debug::AddString("Earth_HP", [this]() { return std::to_string(m_earth.GetHp());}, 0xffffff, 0, "Earth", 2, true, true);
 }
 
