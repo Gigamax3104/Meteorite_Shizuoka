@@ -13,7 +13,7 @@ void GameState::Enter() {
 	m_turret.InitTurretPosition(); //砲台の位置の初期化
 
 	Debug::AddString("Turret_Pos", [this]() { return m_turret.GiveTurretPosition(); }, 0xffffff, 0, "Turret", 0, true, true);
-	Debug::AddString("Earth_HP", [this]() { return std::to_string(m_earth.GetHp());}, 0xffffff, 0, "Earth", 2, true, true);
+	Debug::AddString("Earth_HP", [this]() { return std::to_string(m_earth.GetHp());}, 0xffffff, 0, "Earth", 1, true, true);
 }
 
 StateBase* GameState::Loop() {
