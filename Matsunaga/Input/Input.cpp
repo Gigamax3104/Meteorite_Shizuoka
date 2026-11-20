@@ -1,6 +1,6 @@
 #include "Input.h"
 
-int Input::debugValue;
+//int Input::debugValue;
 
 Input::Input()
 {
