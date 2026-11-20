@@ -4,58 +4,27 @@
 #include	"../h/ErrorMessage.h"
 #include	"../h/GraphicData.h"
 
-Font::Font(std::string text, Vector2 pos, int color) : m_text(text), m_pos(pos), m_color(color), m_show("\0") {
-	for (int i = 0; m_text.size(); i++)
-		m_byte_flag.push_back((m_text[i] >= 0x00 && m_text[i] <= 0x7E) || (m_text[i] >= 0xFF61 && m_text[i] <= 0xFF9F));
-}
-
-void Font::SetFont(const char* font_name, int size, int thick) {
-	if (m_font != -1 && m_font != NULL) DeleteFontToHandle(m_font);
-
-	m_font = CreateFontToHandle(font_name, size, thick);
-}
-
-void Font::SetFont(const char* font_name, int size, int thick, int type) {
-	if (m_font != -1 && m_font != NULL) DeleteFontToHandle(m_font);
-
-	m_font = CreateFontToHandle(font_name, size, thick, type);
-}
-
-void Font::Draw(Vector2 pos, const char* font, Color c) {
+template<typename T>void Font<T>::Draw(Vector2 pos, const char* font, Color c) {
 	DrawString(pos.x, pos.y, font, c.color);
 }
-void Font::Draw(Vector2 pos, std::string font, Color c) {
-	DrawString(pos.x, pos.y, font.c_str(), c.color);
+template<typename T>void Font<T>::Draw(Vector2 pos, std::string font, Color c) {
+	DrawString(pos.x, pos.y, (const TCHAR*)&font, c.color);
 }
 
-void Font::SetText(const char* text) {
-	ResetShow();
-
-	m_text = text;
-
-	for (int i = 0; i < m_text.size(); i++)
-		m_byte_flag.push_back((m_text[i] >= 0x00 && m_text[i] <= 0x7E) || (m_text[i] >= 0xFF61 && m_text[i] <= 0xFF9F));
+template<typename T>void Font<T>::FDraw(Vector2 pos, const char* font, Color c, const T data) {
+	while (data != nullptr) { DrawFormatString(pos.x, pos.y, c.color, font, data); }
 }
 
-void Font::SetText(std::string text) {
-	ResetShow();
-
-	m_text = text;
-
-	for (int i = 0; m_text.size(); i++)
-		m_byte_flag.push_back((m_text[i] >= 0x00 && m_text[i] <= 0x7E) || (m_text[i] >= 0xFF61 && m_text[i] <= 0xFF9F));
+template<typename T>void Font<T>::FDraw(Vector2 pos, std::string font, Color c, const T data) {
+	while (data != nullptr) { DrawFormatString(pos.x, pos.y, c.color, font, data); }
 }
 
-void Font::OrderDrawText() {
-	if (m_text != "\0") {
-		if (m_show_index < m_text.size() - 1) {
-			if (!m_byte_flag[m_show_index]) m_show += m_text[m_show_index++];
-			m_show += m_text[m_show_index++];
-		}
+template<typename T>void Font<T>::ExDraw(Vector2 pos, Vector2 size, const char* font, Color c, const T data) {
+	while (data != nullptr) { DrawExtendFormatString(pos.x, pos.y, size.x, size.y, c.color, font, data); }
+}
 
-		DrawFormatString(m_pos.x, m_pos.y, m_color.color, "%s", m_show.c_str());
-		WaitTimer(128);
-	}
+template<typename T>void Font<T>::ExDraw(Vector2 pos, Vector2 size, std::string font, Color c, const T data){
+	while (data != nullptr) { DrawExtendFormatString(pos.x, pos.y, size.x, size.y, c.color, font, data); }
 }
 
 void Sound::operator=(const Sound& other) { this->m_sound = other.m_sound; }
