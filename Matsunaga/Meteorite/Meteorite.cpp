@@ -4,13 +4,14 @@
 
 #include <vector>
 
-Meteorite::Meteorite(Vector2 pos, double speed, int radius, Vector2 earthPosition)
+Meteorite::Meteorite(Vector2 pos, double speed, int radius, Vector2 earthPosition, int damage)
 {
 	position = pos;
 	this->speed = speed;
 	this->radius = radius;
 	Vector2 distance = earthPosition - position;
 	direction = distance.Normalized();
+	attackDamage = damage;
 }
 
 void Meteorite::Update()
@@ -24,7 +25,7 @@ void Meteorite::Draw()
 	DrawCircle(position.x, position.y, radius, 0xff0000, true);
 }
 
-int Meteorite::GetDamage()
+int Meteorite::GetDamage() const
 {
 	return attackDamage;
 }

@@ -4,7 +4,7 @@
 class Meteorite
 {
 public:
-	Meteorite(Vector2 pos, double speed, int radius, Vector2 earthPosition);
+	Meteorite(Vector2 pos, double speed, int radius, Vector2 earthPosition, int damage);
 	//~Meteorite();
 	void Update();
 	void Draw();
