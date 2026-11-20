@@ -1,6 +1,5 @@
 ﻿#include "DxLib.h"
 #include "System.h"
-#include "../Window.h"
 #include <cstdlib>
 #include <cmath> // 角度計算用（cos, sin）
 
@@ -9,7 +8,7 @@ void System::Init(Vector2 pos, double size, int health) {
 }
 
 void System::Update() {
-    Vector2 centerPos(Window::GetPos().x / 2, Window::GetPos().y / 2); // 変更部分:画面の中心座標（例：幅1080×高さ720の中央）
+    Vector2 centerPos(360.0, 360.0); // 変更部分:画面の中心座標（例：幅1080×高さ720の中央）
 
     // 約2%の確率で、四方八方から隕石を生成する
     if (GetRand(100) < 2) {
