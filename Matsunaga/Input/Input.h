@@ -23,7 +23,7 @@ public:
 	// 移動や特定の複合処理
 	Vector2 GetDirection() const;
 	Vector2 GetDirectionDown() const;
-	int GetDebugValue() const { return debugValue; }
+	static int GetDebugValue() { return debugValue; }
 
 private:
 	// 全キー（DxLibの最大256個）の状態を管理する構造体
@@ -34,6 +34,6 @@ private:
 	};
 	KeyInfo keys[256];
 
-	int debugValue = 0;
+	static int debugValue;
 	const int maxDebugValue = 3;
 };
