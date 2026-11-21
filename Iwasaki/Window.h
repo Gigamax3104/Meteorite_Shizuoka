@@ -1,14 +1,16 @@
 #pragma once
-#include	"../Matsunaga/Vector/Vector.h"
+#include "../Matsunaga/Vector/Vector.h"
 
 class Window {
 public:
-	static void Init(Vector2 pos, int color_bit) { m_pos = pos; m_color_bit = color_bit; }
+	Window() = default;
 
-	static Vector2 GetPos() { return m_pos; }
-	static int GetBit()  { return m_color_bit; }
+	void Init(Vector2 size); // 画面のサイズの初期化（仮引数: Vector2）
+
+	Vector2 GetSize() const; // 画面サイズの取得
+	int GetColorBitDepth() const; // 画面のカラービット数の取得
 
 private:
-	static Vector2 m_pos;
-	static int m_color_bit;
+	Vector2 size_{}; // 画面のサイズ管理
+	int colorBitDepth_ = 32; // 画面のカラービット数管理
 };

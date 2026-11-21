@@ -8,11 +8,11 @@
 
 /////////////////////////////////////////////////////////////////////
 //コンストラクタ
-Ammo::Ammo() : position_(0.0, 0.0),degree_(0.0),flag_(true),
-last_summon_ammo_id_(0),speed_(1.0), summon_span_(14.0), radius_(10.0){}
+Ammo::Ammo() : position_(0.0, 0.0), degree_(0.0), flag_(true),
+last_summon_ammo_id_(0), speed_(1.0), summon_span_(14.0), radius_(10.0) {}
 
-Ammo::Ammo(Vector2 position, double degree) : position_(position),degree_(degree), flag_(true),
-last_summon_ammo_id_(0), speed_(50.0), summon_span_(14.0), radius_(10.0){}
+Ammo::Ammo(Vector2 position, double degree) : position_(position), degree_(degree), flag_(true),
+last_summon_ammo_id_(0), speed_(50.0), summon_span_(14.0), radius_(10.0) {}
 /////////////////////////////////////////////////////////////////////
 
 //弾の座標を更新する
@@ -30,7 +30,7 @@ void Ammo::RenderAmmo() {
 	if (flag_) DrawCircle(position_.x, position_.y, radius_, 0x0000ff, true);
 }
 
-void Ammo::GiveAmmoInfo(double* x, double *y, double* radius,bool* flag) {
+void Ammo::GiveAmmoInfo(double* x, double* y, double* radius, bool* flag) {
 	*x = position_.x;
 	*y = position_.y;
 	*radius = radius_;
@@ -41,5 +41,11 @@ void Ammo::GiveAmmoInfo(Vector2* position, double* radius, bool* flag) {
 	*position = position_;
 	*radius = radius_;
 	*flag = flag_;
+}
 
+void Ammo::AmmoAreaDestroy(const Window& window) {
+	if (position_.x < 0 || position_.x > window.GetSize().x
+		|| position_.y < 0 || position_.y > window.GetSize().y) {
+		flag_ = false;
+	}
 }

@@ -1,4 +1,13 @@
-#include	"Window.h"
+#include "Window.h"
 
-Vector2 Window::m_pos;
-int Window::m_color_bit;
+void Window::Init(Vector2 size) {
+	size_ = size;
+}
+
+Vector2 Window::GetSize() const {
+	return size_;
+}
+
+int Window::GetColorBitDepth() const {
+	return colorBitDepth_;
+}

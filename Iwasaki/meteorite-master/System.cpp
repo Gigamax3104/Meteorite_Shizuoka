@@ -1,40 +1,147 @@
 ﻿#include "DxLib.h"
 #include "System.h"
-#include <cstdlib>
-#include <cmath> // 角度計算用（cos, sin）
+#include "../../Itou/ContentCreation2026_10_19/Ammo.h"
+#include "../../Itou/ContentCreation2026_10_19/Turret.h"
+#include <cmath>
 
-void System::Init(Vector2 pos, double size, int health) {
-    // 初期化処理
+namespace {
+	// 画面の中心座標（砲台・中心位置）
+	constexpr double CENTER_X = 512.0;
+	constexpr double CENTER_Y = 360.0;
+	constexpr double PI = 3.14159265358979323846;
+
+	// 固定の隕石データ：{ 角度(度), 砲台(中心)からの距離 }
+	constexpr double METEOR_SPAWN_TABLE[][2] = {
+		{ 0.0, 300.0 },
+		{ 45.0, 400.0 },
+		{ 90.0, 500.0 },
+		{ 135.0, 550.0 },
+		{ 180.0, 600.0 },
+		{ 225.0, 650.0 },
+		{ 270.0, 700.0 },
+		{ 315.0, 750.0 },
+	};
+
+	// デバッグ確認用：先頭隕石の生成時座標
+	Vector2 debugInitPos0(0.0, 0.0);
 }
 
-void System::Update() {
-    Vector2 centerPos(360.0, 360.0); // 変更部分:画面の中心座標（例：幅1080×高さ720の中央）
+// コンストラクタ
+System::System() {
+	turret = nullptr;
+	limitTime = 60.0;
+	isTimeUp = false;
+	hasInitialized = false;
+}
 
-    // 約2%の確率で、四方八方から隕石を生成する
-    if (GetRand(100) < 2) {
-        double angle = GetRand(360) * 3.14159265 / 180.0; // 1. 周囲のどこから出すか（0〜360度をランダムに決める）
-        double radius = 400.0; // 画面の中心から少し離れた外側から発生させる
+void System::CreateStageMeteors() {
+	meteors.clear();
 
-        Vector2 spawnPos(
-            centerPos.x + cos(angle) * radius, // 2. 角度と半径から、出現する座標（画面の外）を計算する
-            centerPos.y + sin(angle) * radius
-        );
+	const int meteorCount = static_cast<int>(sizeof(METEOR_SPAWN_TABLE) / sizeof(METEOR_SPAWN_TABLE[0]));
+	meteors.reserve(meteorCount);
 
-        double speed = 45 + (double)(GetRand(30)); // 3. スピードを決める
+	const double fixedSpeed = 55.0;
+	const int meteorRadius = 30;
+	const Vector2 centerPos(CENTER_X, CENTER_Y);
 
-        Meteorite newMeteor(spawnPos, speed, 30, centerPos); // 4. 生成してリスト（meteors）に追加する（中心に向かうように centerPos を渡す）
-                                                             //変更部分:Meteoriteのコンストラクタの引数に合わせて変数を設定
-                                                             //詳しくは松永の「Meteorite」ヘッダー内にある「Meteorite.h」を参考
-        meteors.push_back(newMeteor);
-    }
+	for (int i = 0; i < meteorCount; ++i) {
+		const double degree = METEOR_SPAWN_TABLE[i][0];
+		const double distance = METEOR_SPAWN_TABLE[i][1];
+		const double radian = degree * PI / 180.0;
 
-    for (auto meteoriteIt = meteors.begin(); meteoriteIt != meteors.end(); meteoriteIt++)
-    {
-        (meteoriteIt)->Update();
-        (meteoriteIt)->Draw();
-    }
+		Vector2 spawnPos;
+		spawnPos.x = CENTER_X + std::cos(radian) * distance;
+		spawnPos.y = CENTER_Y + std::sin(radian) * distance;
+
+		if (i == 0) {
+			debugInitPos0 = spawnPos;
+		}
+
+		Meteorite meteor(spawnPos, fixedSpeed, meteorRadius, centerPos);
+		meteors.push_back(meteor);
+	}
+}
+
+void System::Init() {
+	Time::Update();
+	limitTime = 30.0;
+	isTimeUp = false;
+	hasInitialized = true;
+	CreateStageMeteors();
 }
 
 void System::LoadStage() {
-    // ステージ読み込み処理
+	Time::Update();
+	limitTime = 60.0;
+	isTimeUp = false;
+	hasInitialized = true;
+	CreateStageMeteors();
+}
+
+void System::Update() {
+	if (!hasInitialized) {
+		Time::Update();
+		limitTime = 60.0;
+		isTimeUp = false;
+		hasInitialized = true;
+		CreateStageMeteors();
+	}
+
+	// --- 1. 時間管理の処理 ---
+	double deltaTime = Time::delta_time;
+	if (!isTimeUp) {
+		double clampedDelta = deltaTime;
+		if (clampedDelta < 0.0) {
+			clampedDelta = 0.0;
+		}
+		if (clampedDelta > 0.1) {
+			clampedDelta = 0.1;
+		}
+
+		limitTime -= clampedDelta;
+
+		if (limitTime <= 0.0) {
+			limitTime = 0.0;
+			isTimeUp = true;
+		}
+	}
+
+	// --- 2. 隕石の更新と描画 ---
+	// 異常な delta_time で隕石がワープしないよう、更新時のみ上限を設ける
+	const double savedDeltaTime = Time::delta_time;
+	double safeMeteorDelta = savedDeltaTime;
+	if (safeMeteorDelta < 0.0) {
+		safeMeteorDelta = 0.0;
+	}
+	if (safeMeteorDelta > 0.1) {
+		safeMeteorDelta = 0.1;
+	}
+	Time::delta_time = safeMeteorDelta;
+
+	for (auto meteoriteIt = meteors.begin(); meteoriteIt != meteors.end(); ++meteoriteIt) {
+		meteoriteIt->Update();
+		meteoriteIt->Draw();
+	}
+
+	Time::delta_time = savedDeltaTime;
+
+	// デバッグ表示：生成時座標と現在座標を比較
+	//DrawFormatString(50, 110, GetColor(0, 255, 255),
+	//	"init0: (%.1f, %.1f)", debugInitPos0.x, debugInitPos0.y);
+
+	//if (!meteors.empty()) {
+	//	Vector2 p0 = meteors[0].Position();
+	//	DrawFormatString(50, 80, GetColor(255, 255, 0),
+	//		"m0: (%.1f, %.1f) dt: %.5f", p0.x, p0.y, deltaTime);
+	//}
+
+	// --- 3. 弾のゲッター取得 ---
+	if (turret != nullptr) {
+		std::vector<Ammo>& ammoList = turret->GiveAmmo();
+		(void)ammoList;
+	}
+
+	// --- 4. 残り時間の画面表示 ---
+	int displayTime = (int)limitTime;
+	DrawFormatString(50, 50, GetColor(255, 255, 255), "残り時間: %d秒", displayTime);
 }
