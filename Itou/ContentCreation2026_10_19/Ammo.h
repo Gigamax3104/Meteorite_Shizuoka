@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "../../Matsunaga/Vector/Vector.h"
+
+#include	"../../Iwasaki/Window.h"
 //クラス名、関数名はアッパーキャメルケース、変数名はローワースネークケース、ただし、グローバル変数はアッパースネークケース
 
 //弾に関するクラス宣言
@@ -23,7 +25,7 @@ public:
 	//弾の描画
 	void RenderAmmo();
 	//弾の諸元情報を渡す
-	void GiveAmmoInfo(double* x, double* y, double* radius,bool* flag);
+	void GiveAmmoInfo(double* x, double* y, double* radius, bool* flag);
 	void GiveAmmoInfo(Vector2* position, double* radius, bool* flag);
 
 	//ここから追加・変更部分
@@ -33,11 +35,7 @@ public:
 	double Radius() const { return radius_; } //半径の取得
 	bool Flag() const { return flag_; } //オブジェクトアクティブフラグの取得
 	Vector2 Position() const { return position_; } //位置の取得
+
+	void AmmoAreaDestroy(const Window& window);
 };
 
-class DynamicAmmo {
-private:
-	Vector2 ammo_position;
-	bool ammo_flag;
-public:
-};

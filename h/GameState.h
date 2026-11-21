@@ -17,4 +17,6 @@ private:
 	Earth m_earth; //地球
 
 	System m_system; //システム
+
+	Window m_window; //画面
 };

@@ -22,15 +22,39 @@ private:
 	Input m_input;
 
 	std::vector<Ammo> ammoes_;
+	//タレットが破損(発射不能になっているか)を管理するbool
+	bool is_turret_broken_;
+	//タレットが被弾してからの経過時間を計算する変数
+	double turret_broken_process_time_;
+	//タレットの修復にかかる時間、備考 : コンストラクタで設定する
+	double turret_repair_time_;
+
+	//タレットの半径、備考 : コンストラクタで設定する
+	double turret_hit_radius_;
+	//タレット描画の左上頂点の座標
+	Vector2 left_up_position;
+	//タレット描画の左下頂点の座標
+	Vector2 left_down_position;
+	//タレット描画の右上頂点の座標
+	Vector2 right_up_position;
+	//タレット描画の右下頂点の座標
+	Vector2 right_down_position;
+
+	//タレットの再装填時間の計算に使う変数
+	double turret_reloading_process_time_;
+	//タレットの再装填にかかる時間、コンストラクタで設定する
+	double turret_shoot_span_;
+	//タレットが装填済みかを管理する変数、発射検知も兼ねる
+	bool is_turret_reloaded_;
 public:
 	//コンストラクタ
 	Turret();
 	//砲台の初期座標設定
-	void InitTurretPosition();
+	void InitTurretPosition(const Vector2& window_pos);
 	//プレイヤーのインプットを受け取る
 	void InputTurretPosition();
 	//プレイヤーの位置更新
-	void UpdateTurretPosition();
+	void UpdateTurretPosition(const Vector2& window_pos);
 	//プレイヤーのX座標情報を渡す
 	double GiveTurretPositionX();
 	//プレイヤーののY座標情報を渡す
@@ -51,4 +75,12 @@ public:
 	void InputTurretShoot();
 	//プレイヤーとプレイヤーの移動の中心を表示する
 	void RenderTurretAndTurretCenterPoint();
+	//タレットが被弾したときに呼ぶ関数、タレットを発射不能にする
+	void SetTurretBroken();
+	//タレットが被弾してから何秒経過したか計算する関数
+	void TurretBrokenProcessTime();
+	//タレットの半径を渡す関数
+	double GetTurretHitRadius();
+	//タレットが再装填を開始してからの経過時間を計算する関数
+	void TurretReloadProcessTime();
 };
