@@ -13,13 +13,9 @@ public:
 	//追加・変更部分
 	int Radius() const { return radius; } /*半径の取得*/
 	Vector2 Position() const { return position; } /*位置の取得*/
-
-	int Damage() const { return damage; }
 private:
 	Vector2 position;
 	Vector2 direction;
 	double speed;
 	int radius;
-
-	int damage = 1;
 };
