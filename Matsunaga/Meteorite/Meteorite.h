@@ -20,5 +20,5 @@ private:
 	Vector2 direction;
 	double speed;
 	int radius;
-	int attackDamage;
+	int attackDamage = 1;
 };
