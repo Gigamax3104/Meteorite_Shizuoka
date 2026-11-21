@@ -83,4 +83,7 @@ public:
 	double GetTurretHitRadius();
 	//タレットが再装填を開始してからの経過時間を計算する関数
 	void TurretReloadProcessTime();
+
+	//2026/11/21追加分
+	void temp();
 };
