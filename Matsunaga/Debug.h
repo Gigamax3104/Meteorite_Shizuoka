@@ -1,5 +1,5 @@
 #pragma once
-#pragma once
+
 #include <string> // std::string用
 #include <functional> // std::function用
 #include <ios> // std::boolalpha用
