@@ -164,6 +164,7 @@
     <ClCompile Include="Iwasaki\Time\Time.cpp" />
     <ClCompile Include="Iwasaki\Window.cpp" />
     <ClCompile Include="Kihara\earth-master\Earth.cpp" />
+    <ClCompile Include="Matsunaga\Debug.cpp" />
     <ClCompile Include="Matsunaga\Debug\Debug.cpp" />
     <ClCompile Include="Matsunaga\Input\Input.cpp" />
     <ClCompile Include="Matsunaga\Meteorite\Meteorite.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Iwasaki\Time\Time.h" />
     <ClInclude Include="Iwasaki\Window.h" />
     <ClInclude Include="Kihara\earth-master\Earth.h" />
+    <ClInclude Include="Matsunaga\Debug.h" />
     <ClInclude Include="Matsunaga\Debug\Debug.h" />
     <ClInclude Include="Matsunaga\Input\Input.h" />
     <ClInclude Include="Matsunaga\Meteorite\Meteorite.h" />
