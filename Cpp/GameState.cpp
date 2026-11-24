@@ -6,7 +6,7 @@
 #include	"../Iwasaki/Collision/Collision.h"
 #include	"../Iwasaki/Window.h"
 
-#include	"../Matsunaga/Debug.h"
+#include	"../Matsunaga/Debug/Debug.h"
 
 using namespace std;
 
