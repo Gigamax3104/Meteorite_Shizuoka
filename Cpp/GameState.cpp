@@ -39,7 +39,7 @@ StateBase* GameState::Loop() {
 
 	for (auto meteoriteIt = meteorites.begin(); meteoriteIt != meteorites.end(); ) {
 		if (Collision::CircleAndCircle(m_earth.GetPos(), m_earth.GetSize(), meteoriteIt->Position(), meteoriteIt->Radius())) {
-			//m_earth.OnHit(meteoriteIt->GetDamage());
+			m_earth.OnHit(meteoriteIt->GetDamage());
 			meteoriteIt = meteorites.erase(meteoriteIt);
 
 			if (m_earth.IsDestroyed()) return new ResultState(false);
