@@ -13,7 +13,6 @@ public:
 	//追加・変更部分
 	int Radius() const { return radius; } /*半径の取得*/
 	Vector2 Position() const { return position; } /*位置の取得*/
-	int GetDamage() const;
 
 private:
 	Vector2 position;

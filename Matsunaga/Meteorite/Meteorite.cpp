@@ -23,8 +23,3 @@ void Meteorite::Draw()
 {
 	DrawCircle(position.x, position.y, radius, 0xff0000, true);
 }
-
-int Meteorite::GetDamage() const
-{
-	return attackDamage;
-}
