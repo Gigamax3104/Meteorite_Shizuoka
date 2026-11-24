@@ -186,7 +186,7 @@
     <ClInclude Include="Iwasaki\Time\Time.h" />
     <ClInclude Include="Iwasaki\Window.h" />
     <ClInclude Include="Kihara\earth-master\Earth.h" />
-    <ClInclude Include="Matsunaga\Debug.h" />
+    <ClInclude Include="Matsunaga\Debug\Debug.h" />
     <ClInclude Include="Matsunaga\Input\Input.h" />
     <ClInclude Include="Matsunaga\Meteorite\Meteorite.h" />
     <ClInclude Include="Matsunaga\Vector\Vector.h" />
