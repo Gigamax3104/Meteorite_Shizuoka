@@ -15,7 +15,7 @@ Meteorite::Meteorite(Vector2 pos, double speed, int radius, Vector2 earthPositio
 
 void Meteorite::Update()
 {
-	// ˆÚ“®ˆ—
+	// Ë†Ãšâ€œÂ®ÂË†â€”Â
 	position += direction * speed * Time::delta_time;
 }
 
