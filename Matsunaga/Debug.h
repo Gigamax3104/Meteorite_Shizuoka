@@ -65,7 +65,4 @@ namespace Debug
 	//void Draw(const int targetMode, const std::string& targetTag); // モード、タグ指定で表示
 	//void Draw(); // デフォルト表示(モードがタグを指定していないデバッグを表示（0, ""))
 	void AllDraw(); // モード、タグ関係なくすべて表示
-
-
-
 }
