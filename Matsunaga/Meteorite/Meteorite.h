@@ -18,6 +18,7 @@ public:
 private:
 	Vector2 position;
 	Vector2 direction;
+	int modelHandle;
 	double speed;
 	int radius;
 	int attackDamage = 1;
